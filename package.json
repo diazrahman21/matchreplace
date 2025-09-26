@@ -1,0 +1,32 @@
+{
+  "name": "match-replacer",
+  "version": "1.0.0",
+  "description": "Professional URL Segment Replacement Tool - A modern web application for bulk URL processing",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": [
+    "url-processing",
+    "bulk-operations",
+    "regex",
+    "web-tool",
+    "professional",
+    "javascript"
+  ],
+  "author": "diazrahman21",
+  "license": "MIT",
+  "homepage": "https://github.com/diazrahman21/matchreplace#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diazrahman21/matchreplace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/diazrahman21/matchreplace/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
