@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Replacer - URL Segment Replacer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Match Replacer</h1>
+            <p class="text-gray-600 text-lg">Ganti segmen URL setelah /id/ dengan mudah</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+            <!-- File Upload Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    Upload File Links
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- File Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Upload File (.txt)
+                        </label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition-colors duration-200">
+                            <input type="file" id="fileInput" accept=".txt" class="hidden">
+                            <label for="fileInput" class="cursor-pointer">
+                                <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p class="text-gray-600">
+                                    <span class="font-medium text-indigo-600">Klik untuk upload</span> atau drag & drop
+                                </p>
+                                <p class="text-sm text-gray-500 mt-1">File .txt dengan satu link per baris</p>
+                            </label>
+                        </div>
+                        <div id="fileInfo" class="mt-2 text-sm text-gray-600 hidden"></div>
+                    </div>
+                    
+                    <!-- Manual Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Atau Input Manual
+                        </label>
+                        <textarea 
+                            id="manualInput" 
+                            placeholder="Masukkan links satu per baris:&#10;https://example.com/id/test1&#10;https://example.com/id/test2"
+                            class="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none"
+                        ></textarea>
+                        <button 
+                            id="loadManualBtn"
+                            class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                        >
+                            Load Links Manual
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sample Data Button -->
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <button 
+                        id="loadSampleBtn"
+                        class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                    >
+                        Gunakan Data Contoh
+                    </button>
+                    <span class="text-sm text-gray-500 ml-2">3 link contoh untuk testing</span>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Left Column - Original Links -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                        </svg>
+                        Link Awal
+                        <span id="linkCount" class="ml-auto text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">0</span>
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto">
+                        <div id="originalLinks" class="space-y-2">
+                            <p class="text-gray-500 italic text-center pt-20">Upload file atau input manual untuk memulai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Updated Links -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold text-gray-800 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Link Baru
+                        </h2>
+                        <button 
+                            id="exportBtn"
+                            onclick="exportResults()"
+                            class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center"
+                            title="Export ke file .txt"
+                        >
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto">
+                        <div id="updatedLinks" class="space-y-2">
+                            <p class="text-gray-500 italic text-center pt-20">Link yang sudah diperbarui akan muncul di sini</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                    Ganti Segmen URL
+                </h2>
+                
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <label for="newSection" class="block text-sm font-medium text-gray-700 mb-2">
+                            Path Baru (setelah /id/)
+                        </label>
+                        <input 
+                            type="text" 
+                            id="newSection" 
+                            placeholder="football/match123.html"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                        >
+                        <p class="text-sm text-gray-500 mt-1">Contoh: football/match123.html atau basketball/game456.html</p>
+                    </div>
+                    
+                    <div class="flex items-end">
+                        <button 
+                            id="replaceBtn"
+                            class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        >
+                            Ganti dan Tampilkan Link Baru
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-600" id="totalLinks">0</div>
+                        <div class="text-gray-600">Total Link</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600" id="processedLinks">0</div>
+                        <div class="text-gray-600">Berhasil Diproses</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-600" id="lastUpdated">-</div>
+                        <div class="text-gray-600">Terakhir Diperbarui</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample links data (for demonstration)
+        const sampleLinksData = [
+            "https://example.com/en/id/basketball/game456.html?data=a",
+            "https://anothersite.net/id/volleyball/match789/result",
+            "https://yetanother.com/page/id/hockey/schedule.asp"
+        ];
+
+        // Current working links data
+        let originalLinksData = [];
+
+        // DOM elements
+        const originalLinksContainer = document.getElementById('originalLinks');
+        const updatedLinksContainer = document.getElementById('updatedLinks');
+        const newSectionInput = document.getElementById('newSection');
+        const replaceBtn = document.getElementById('replaceBtn');
+        const totalLinksSpan = document.getElementById('totalLinks');
+        const processedLinksSpan = document.getElementById('processedLinks');
+        const lastUpdatedSpan = document.getElementById('lastUpdated');
+        const linkCountSpan = document.getElementById('linkCount');
+        
+        // File upload elements
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const manualInput = document.getElementById('manualInput');
+        const loadManualBtn = document.getElementById('loadManualBtn');
+        const loadSampleBtn = document.getElementById('loadSampleBtn');
+
+        // Initialize the application
+        function init() {
+            displayOriginalLinks();
+            updateStatistics();
+            
+            // Add event listeners
+            replaceBtn.addEventListener('click', handleReplace);
+            newSectionInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleReplace();
+                }
+            });
+            
+            // File upload listeners
+            fileInput.addEventListener('change', handleFileUpload);
+            loadManualBtn.addEventListener('click', handleManualInput);
+            loadSampleBtn.addEventListener('click', loadSampleData);
+            
+            // Drag and drop functionality
+            const dropZone = fileInput.parentElement;
+            dropZone.addEventListener('dragover', handleDragOver);
+            dropZone.addEventListener('drop', handleDrop);
+            dropZone.addEventListener('dragleave', handleDragLeave);
+        }
+
+        // Handle file upload
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.name.endsWith('.txt')) {
+                showNotification('Harap upload file .txt', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                const links = content.split('\n')
+                    .map(link => link.trim())
+                    .filter(link => link.length > 0);
+                
+                if (links.length === 0) {
+                    showNotification('File kosong atau tidak berisi link valid', 'error');
+                    return;
+                }
+                
+                originalLinksData = links;
+                displayOriginalLinks();
+                updateStatistics();
+                clearResults();
+                
+                // Show file info
+                fileInfo.textContent = `✓ File "${file.name}" berhasil dimuat (${links.length} links)`;
+                fileInfo.className = 'mt-2 text-sm text-green-600';
+                fileInfo.classList.remove('hidden');
+                
+                showNotification(`Berhasil memuat ${links.length} links dari file`, 'success');
+            };
+            
+            reader.onerror = function() {
+                showNotification('Gagal membaca file', 'error');
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Handle manual input
+        function handleManualInput() {
+            const inputText = manualInput.value.trim();
+            
+            if (!inputText) {
+                showNotification('Harap masukkan links terlebih dahulu', 'error');
+                return;
+            }
+            
+            const links = inputText.split('\n')
+                .map(link => link.trim())
+                .filter(link => link.length > 0);
+            
+            if (links.length === 0) {
+                showNotification('Tidak ada link valid yang ditemukan', 'error');
+                return;
+            }
+            
+            originalLinksData = links;
+            displayOriginalLinks();
+            updateStatistics();
+            clearResults();
+            
+            showNotification(`Berhasil memuat ${links.length} links manual`, 'success');
+            
+            // Clear file input if any
+            fileInput.value = '';
+            fileInfo.classList.add('hidden');
+        }
+
+        // Load sample data
+        function loadSampleData() {
+            originalLinksData = [...sampleLinksData];
+            displayOriginalLinks();
+            updateStatistics();
+            clearResults();
+            
+            // Clear inputs
+            fileInput.value = '';
+            manualInput.value = '';
+            fileInfo.classList.add('hidden');
+            
+            showNotification('Data contoh berhasil dimuat', 'success');
+        }
+
+        // Drag and drop handlers
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('border-indigo-500', 'bg-indigo-50');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('border-indigo-500', 'bg-indigo-50');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('border-indigo-500', 'bg-indigo-50');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileUpload({ target: { files: files } });
+            }
+        }
+
+        // Clear results
+        function clearResults() {
+            updatedLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Link yang sudah diperbarui akan muncul di sini</p>';
+            processedLinksSpan.textContent = '0';
+            lastUpdatedSpan.textContent = '-';
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            toast.className = `fixed top-4 right-4 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg z-50 transform transition-all duration-300`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => {
+                    if (document.body.contains(toast)) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Display original links
+        function displayOriginalLinks() {
+            originalLinksContainer.innerHTML = '';
+            linkCountSpan.textContent = originalLinksData.length;
+            
+            if (originalLinksData.length === 0) {
+                originalLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Upload file atau input manual untuk memulai</p>';
+                return;
+            }
+            
+            originalLinksData.forEach((link, index) => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'bg-white p-3 rounded-lg border border-gray-200 text-sm';
+                linkElement.innerHTML = `
+                    <div class="flex items-start">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${index + 1}</span>
+                        <span class="break-all text-gray-700">${link}</span>
+                        <button 
+                            onclick="removeLink(${index})" 
+                            class="ml-auto p-1 text-red-400 hover:text-red-600 transition-colors duration-200"
+                            title="Hapus link ini"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                originalLinksContainer.appendChild(linkElement);
+            });
+        }
+
+        // Remove individual link
+        function removeLink(index) {
+            if (confirm('Yakin ingin menghapus link ini?')) {
+                originalLinksData.splice(index, 1);
+                displayOriginalLinks();
+                updateStatistics();
+                clearResults();
+                showNotification('Link berhasil dihapus', 'success');
+            }
+        }
+
+        // Handle replace functionality
+        function handleReplace() {
+            if (originalLinksData.length === 0) {
+                showNotification('Harap upload file atau input links terlebih dahulu!', 'error');
+                return;
+            }
+            
+            const newSection = newSectionInput.value.trim();
+            
+            if (!newSection) {
+                showNotification('Silakan masukkan path baru terlebih dahulu!', 'error');
+                newSectionInput.focus();
+                return;
+            }
+
+            // Validate input (basic validation)
+            if (newSection.startsWith('/') || newSection.endsWith('/')) {
+                showNotification('Path tidak boleh dimulai atau diakhiri dengan "/"', 'error');
+                return;
+            }
+
+            const updatedLinks = replaceMatchSection(newSection);
+            displayUpdatedLinks(updatedLinks);
+            updateStatistics(updatedLinks.length);
+            
+            // Add success animation
+            replaceBtn.classList.add('animate-pulse');
+            setTimeout(() => {
+                replaceBtn.classList.remove('animate-pulse');
+            }, 1000);
+            
+            showNotification(`Berhasil memproses ${updatedLinks.length} links`, 'success');
+        }
+
+        // Core replacement logic (equivalent to Python regex)
+        function replaceMatchSection(newSection) {
+            const updatedLinks = [];
+            
+            originalLinksData.forEach(link => {
+                // JavaScript equivalent of Python's r'(/id/).*' regex
+                // This replaces everything after '/id/' with the new section
+                const updatedLink = link.replace(/\/id\/.*/, '/id/' + newSection);
+                updatedLinks.push(updatedLink);
+            });
+            
+            return updatedLinks;
+        }
+
+        // Display updated links
+        function displayUpdatedLinks(links) {
+            updatedLinksContainer.innerHTML = '';
+            
+            if (links.length === 0) {
+                updatedLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Tidak ada link yang diperbarui</p>';
+                return;
+            }
+            
+            links.forEach((link, index) => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'bg-white p-3 rounded-lg border border-green-200 text-sm transform transition-all duration-300 hover:scale-102';
+                linkElement.innerHTML = `
+                    <div class="flex items-start">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${index + 1}</span>
+                        <span class="break-all text-gray-700">${link}</span>
+                        <button 
+                            onclick="copyToClipboard('${link}')" 
+                            class="ml-2 p-1 text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                            title="Copy to clipboard"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                updatedLinksContainer.appendChild(linkElement);
+            });
+        }
+
+        // Update statistics
+        function updateStatistics(processedCount = 0) {
+            totalLinksSpan.textContent = originalLinksData.length;
+            processedLinksSpan.textContent = processedCount;
+            
+            if (processedCount > 0) {
+                const now = new Date();
+                lastUpdatedSpan.textContent = now.toLocaleTimeString('id-ID', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+            }
+        }
+
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Link berhasil disalin!', 'success');
+            }).catch(() => {
+                showNotification('Gagal menyalin link ke clipboard', 'error');
+            });
+        }
+
+        // Export results to file
+        function exportResults() {
+            if (updatedLinksContainer.querySelector('p')) {
+                showNotification('Tidak ada hasil untuk diekspor', 'error');
+                return;
+            }
+            
+            const links = Array.from(updatedLinksContainer.querySelectorAll('.break-all')).map(el => el.textContent);
+            const content = links.join('\n');
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'updated_links.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('File berhasil diunduh', 'success');
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
