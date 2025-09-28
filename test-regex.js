@@ -24,10 +24,10 @@ function replaceTigagoalsPath(url, newPath) {
     return newUrl;
 }
 
-function replaceMatchSection(Link, newSection) {
-    const updatedLink = [];
+function replaceMatchSection(links, newSection) {
+    const updatedLinks = [];
     
-    Link.forEach(link => {
+    links.forEach(link => {
         let updatedLink;
         
         if (isTigaoalsUrl(link)) {
@@ -36,10 +36,10 @@ function replaceMatchSection(Link, newSection) {
             updatedLink = link.replace(/\/id\/.*/, '/id/' + newSection);
         }
         
-        updatedLink.push(updatedLink);
+        updatedLinks.push(updatedLink);
     });
     
-    return updatedLink;
+    return updatedLinks;
 }
 
 // Test cases

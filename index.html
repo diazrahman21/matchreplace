@@ -45,65 +45,33 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-        
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
-            
-            /* Better text overflow handling for mobile */
-            .break-all {
-                word-break: break-word;
-                overflow-wrap: break-word;
-                hyphens: auto;
-            }
-            
-            /* Adjust button sizes for mobile */
-            button {
-                min-height: 44px; /* Apple recommended touch target */
-            }
-            
-            /* Improve input field usability */
-            input, textarea {
-                font-size: 16px; /* Prevent zoom on iOS */
-            }
-        }
-        
-        /* Very small screen optimizations */
-        @media (max-width: 375px) {
-            .text-3xl { font-size: 1.5rem; }
-            .text-4xl { font-size: 1.75rem; }
-            .text-5xl { font-size: 2rem; }
-        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+    <div class="container mx-auto px-6 py-12">
         <!-- Header -->
-        <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-700 tracking-tight mb-3 sm:mb-4">Match Replacer</h1>
-            <p class="text-slate-500 text-base sm:text-lg lg:text-xl font-light px-2 sm:px-0">Ganti segmen URL dengan mudah</p>
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-slate-700 tracking-tight mb-4">Match Replacer</h1>
+            <p class="text-slate-500 text-xl font-light">Ganti segmen URL setelah /id/ dengan mudah</p>
         </div>
 
         <div class="max-w-7xl mx-auto">
             <!-- File Upload Section -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-slate-700 mb-6 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
-                    Upload File Link
+                    Upload File Links
                 </h2>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div class="grid md:grid-cols-2 gap-6">
                     <!-- File Upload -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-3">
                             Upload File (.txt)
                         </label>
-                        <div class="border-2 border-dashed border-slate-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:border-blue-400 hover:bg-blue-50/30 transition-all duration-300 bg-slate-50/50 h-32 sm:h-40 flex flex-col justify-center">
+                        <div class="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-blue-400 hover:bg-blue-50/30 transition-all duration-300 bg-slate-50/50 h-40 flex flex-col justify-center">
                             <input type="file" id="fileInput" accept=".txt" class="hidden">
                             <label for="fileInput" class="cursor-pointer">
                                 <svg class="mx-auto h-10 w-10 text-slate-400 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -125,57 +93,55 @@
                         </label>
                         <textarea 
                             id="manualInput" 
-                            placeholder="Masukkan Link satu per baris:&#10;https://example.com/id/test1&#10;https://example.com/id/test2"
-                            class="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-300/50 focus:border-blue-300 outline-none resize-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
+                            placeholder="Masukkan links satu per baris:&#10;https://example.com/id/test1&#10;https://example.com/id/test2"
+                            class="w-full h-40 px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-300/50 focus:border-blue-300 outline-none resize-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
                         ></textarea>
                         <button 
                             id="loadManualBtn"
-                            class="mt-3 w-full sm:w-auto bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                            class="mt-3 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
                         >
-                            Load Link Manual
+                            Load Links Manual
                         </button>
                     </div>
                 </div>
                 
                 <!-- Sample Data Button -->
-                <div class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-slate-200">
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0">
-                        <button 
-                            id="loadSampleBtn"
-                            class="w-full sm:w-auto bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                        >
-                            Gunakan Data Contoh
-                        </button>
-                        <span class="text-sm text-slate-500 sm:ml-3 font-light text-center sm:text-left">5 link contoh (Super Rabbit & Tigagoals) untuk testing</span>
-                    </div>
+                <div class="mt-6 pt-6 border-t border-slate-200">
+                    <button 
+                        id="loadSampleBtn"
+                        class="bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                    >
+                        Gunakan Data Contoh
+                    </button>
+                    <span class="text-sm text-slate-500 ml-3 font-light">5 link contoh (Super Rabbit & Tigagoals) untuk testing</span>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
-                <!-- Left Column - Original Link -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6">
-                    <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Left Column - Original Links -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-6">
+                    <h2 class="text-2xl font-semibold text-slate-700 mb-6 flex items-center">
                         <svg class="w-6 h-6 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                         Link Awal
-                        <div class="flex flex-wrap gap-2 sm:ml-auto">
-                            <span id="superRabbitCount" class="text-xs sm:text-sm bg-amber-100/70 text-amber-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0 SR</span>
-                            <span id="tigagoalsCount" class="text-xs sm:text-sm bg-violet-100/70 text-violet-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0 TG</span>
-                            <span id="linkCount" class="text-xs sm:text-sm bg-blue-100/70 text-blue-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0</span>
+                        <div class="ml-auto flex gap-2">
+                            <span id="superRabbitCount" class="text-sm bg-amber-100/70 text-amber-700 px-3 py-1.5 rounded-full font-medium">0 SR</span>
+                            <span id="tigagoalsCount" class="text-sm bg-violet-100/70 text-violet-700 px-3 py-1.5 rounded-full font-medium">0 TG</span>
+                            <span id="linkCount" class="text-sm bg-blue-100/70 text-blue-700 px-3 py-1.5 rounded-full font-medium">0</span>
                         </div>
                     </h2>
-                    <div class="bg-slate-50/50 rounded-xl p-4 sm:p-6 h-64 sm:h-72 overflow-y-auto border border-slate-100">
-                        <div id="originalLink" class="space-y-2 sm:space-y-3">
-                            <p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Upload file atau input manual untuk memulai</p>
+                    <div class="bg-slate-50/50 rounded-xl p-6 h-72 overflow-y-auto border border-slate-100">
+                        <div id="originalLinks" class="space-y-3">
+                            <p class="text-slate-400 italic text-center pt-24 font-light">Upload file atau input manual untuk memulai</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column - Updated Link -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3 sm:gap-0">
-                        <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 flex items-center">
+                <!-- Right Column - Updated Links -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold text-slate-700 flex items-center">
                             <svg class="w-6 h-6 mr-2 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -184,7 +150,7 @@
                         <button 
                             id="exportBtn"
                             onclick="exportResults()"
-                            class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center justify-center sm:justify-start shadow-md hover:shadow-lg"
+                            class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
                             title="Export ke file .txt"
                         >
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,57 +159,53 @@
                             Export
                         </button>
                     </div>
-                    <div class="bg-slate-50/50 rounded-xl p-4 sm:p-6 h-64 sm:h-72 overflow-y-auto border border-slate-100">
-                        <div id="updatedLink" class="space-y-2 sm:space-y-3">
-                            <p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Link yang sudah diperbarui akan muncul di sini</p>
+                    <div class="bg-slate-50/50 rounded-xl p-6 h-72 overflow-y-auto border border-slate-100">
+                        <div id="updatedLinks" class="space-y-3">
+                            <p class="text-slate-400 italic text-center pt-24 font-light">Link yang sudah diperbarui akan muncul di sini</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Input Section -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 lg:p-8 mt-6 sm:mt-8">
-                <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-6 sm:mb-8 flex items-center">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-8 mt-8">
+                <h2 class="text-2xl font-semibold text-slate-700 mb-8 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00 2 2h11a2 2 0 00 2-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
                     Ganti Segmen URL
                 </h2>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
                     <!-- Super Rabbit Input -->
-                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-amber-200/50 transition-all duration-300 hover:shadow-lg hover:border-amber-300/50">
-                        <label for="superRabbitInput" class="block text-sm font-semibold text-amber-800 mb-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
-                            <div class="flex items-center">
-                                <span class="bg-amber-200/60 text-amber-900 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full mr-3 font-medium">Super Rabbit</span>
-                                <span class="text-xs sm:text-sm">Path Baru (setelah /id/)</span>
-                            </div>
-                            <span id="srWillProcess" class="text-xs text-orange-600 font-medium hidden sm:ml-auto">akan diproses</span>
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border border-amber-200/50 transition-all duration-300 hover:shadow-lg hover:border-amber-300/50">
+                        <label for="superRabbitInput" class="block text-sm font-semibold text-amber-800 mb-3 flex items-center">
+                            <span class="bg-amber-200/60 text-amber-900 text-xs px-3 py-1.5 rounded-full mr-3 font-medium">Super Rabbit</span>
+                            Path Baru (setelah /id/)
+                            <span id="srWillProcess" class="ml-auto text-xs text-orange-600 font-medium hidden">akan diproses</span>
                         </label>
                         <input 
                             type="text" 
                             id="superRabbitInput" 
                             placeholder="football/match123.html"
-                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3.5 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-300/50 focus:border-amber-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
+                            class="w-full px-4 py-3.5 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-300/50 focus:border-amber-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
                         >
                         <p class="text-sm text-amber-600 mt-2 font-light">Contoh: football/match123.html atau basketball/game456.html</p>
                         <p id="srCount" class="text-xs text-orange-500 mt-1 hidden">0 URLs Super Rabbit terdeteksi</p>
                     </div>
                     
                     <!-- Tigagoals Input -->
-                    <div class="bg-gradient-to-br from-violet-50 to-purple-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-violet-200/50 transition-all duration-300 hover:shadow-lg hover:border-violet-300/50">
-                        <label for="tigagoalsInput" class="block text-sm font-semibold text-violet-800 mb-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
-                            <div class="flex items-center">
-                                <span class="bg-violet-200/60 text-violet-900 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full mr-3 font-medium">Tigagoals</span>
-                                <span class="text-xs sm:text-sm">Path Baru (setelah /football/)</span>
-                            </div>
-                            <span id="tgWillProcess" class="text-xs text-purple-600 font-medium hidden sm:ml-auto">akan diproses</span>
+                    <div class="bg-gradient-to-br from-violet-50 to-purple-50 p-6 rounded-2xl border border-violet-200/50 transition-all duration-300 hover:shadow-lg hover:border-violet-300/50">
+                        <label for="tigagoalsInput" class="block text-sm font-semibold text-violet-800 mb-3 flex items-center">
+                            <span class="bg-violet-200/60 text-violet-900 text-xs px-3 py-1.5 rounded-full mr-3 font-medium">Tigagoals</span>
+                            Path Baru (setelah /football/)
+                            <span id="tgWillProcess" class="ml-auto text-xs text-purple-600 font-medium hidden">akan diproses</span>
                         </label>
                         <input 
                             type="text" 
                             id="tigagoalsInput" 
                             placeholder="2800070-rennes-vs-lens.html"
-                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3.5 border border-violet-200 rounded-xl focus:ring-2 focus:ring-violet-300/50 focus:border-violet-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
+                            class="w-full px-4 py-3.5 border border-violet-200 rounded-xl focus:ring-2 focus:ring-violet-300/50 focus:border-violet-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
                         >
                         <p class="text-sm text-violet-600 mt-2 font-light">Contoh: 2800070-rennes-vs-lens.html atau 2800071-psg-vs-lyon.html</p>
                         <p id="tgCount" class="text-xs text-purple-500 mt-1 hidden">0 URLs Tigagoals terdeteksi</p>
@@ -253,7 +215,7 @@
                 <div class="flex justify-center">
                     <button 
                         id="replaceBtn"
-                        class="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300/50 focus:ring-offset-2 flex items-center justify-center shadow-lg text-sm sm:text-base"
+                        class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-10 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300/50 focus:ring-offset-2 flex items-center shadow-lg"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -264,19 +226,19 @@
             </div>
 
             <!-- Statistics -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 mt-6 sm:mt-8">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-6 mt-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="text-center">
-                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-500" id="totalLink">0</div>
-                        <div class="text-slate-600 font-medium text-sm sm:text-base">Total Link</div>
+                        <div class="text-4xl font-bold text-blue-500" id="totalLinks">0</div>
+                        <div class="text-slate-600 font-medium">Total Link</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-500" id="processedLink">0</div>
-                        <div class="text-slate-600 font-medium text-sm sm:text-base">Berhasil Diproses</div>
+                        <div class="text-4xl font-bold text-emerald-500" id="processedLinks">0</div>
+                        <div class="text-slate-600 font-medium">Berhasil Diproses</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-violet-500" id="lastUpdated">-</div>
-                        <div class="text-slate-600 font-medium text-sm sm:text-base">Terakhir Diperbarui</div>
+                        <div class="text-4xl font-bold text-violet-500" id="lastUpdated">-</div>
+                        <div class="text-slate-600 font-medium">Terakhir Diperbarui</div>
                     </div>
                 </div>
             </div>
@@ -284,8 +246,8 @@
     </div>
 
     <script>
-        // Sample Link data (for demonstration)
-        const sampleLinkData = [
+        // Sample links data (for demonstration)
+        const sampleLinksData = [
             "https://example.com/en/id/basketball/game456.html?data=a",
             "https://anothersite.net/id/volleyball/match789/result",
             "https://idn00041.tigoals215.com/football/2800065-lille-vs-lyon.html",
@@ -293,17 +255,17 @@
             "https://superrabbit.com/id/soccer/match123.html"
         ];
 
-        // Current working Link data
-        let originalLinkData = [];
+        // Current working links data
+        let originalLinksData = [];
 
         // DOM elements
-        const originalLinkContainer = document.getElementById('originalLink');
-        const updatedLinkContainer = document.getElementById('updatedLink');
+        const originalLinksContainer = document.getElementById('originalLinks');
+        const updatedLinksContainer = document.getElementById('updatedLinks');
         const superRabbitInput = document.getElementById('superRabbitInput');
         const tigagoalsInput = document.getElementById('tigagoalsInput');
         const replaceBtn = document.getElementById('replaceBtn');
-        const totalLinkSpan = document.getElementById('totalLink');
-        const processedLinkSpan = document.getElementById('processedLink');
+        const totalLinksSpan = document.getElementById('totalLinks');
+        const processedLinksSpan = document.getElementById('processedLinks');
         const lastUpdatedSpan = document.getElementById('lastUpdated');
         const linkCountSpan = document.getElementById('linkCount');
         const superRabbitCountSpan = document.getElementById('superRabbitCount');
@@ -318,7 +280,7 @@
 
         // Initialize the application
         function init() {
-            displayOriginalLink();
+            displayOriginalLinks();
             updateStatistics();
             
             // Add event listeners
@@ -359,26 +321,26 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const content = e.target.result;
-                const Link = content.split('\n')
+                const links = content.split('\n')
                     .map(link => link.trim())
                     .filter(link => link.length > 0);
                 
-                if (Link.length === 0) {
+                if (links.length === 0) {
                     showNotification('File kosong atau tidak berisi link valid', 'error');
                     return;
                 }
                 
-                originalLinkData = Link;
-                displayOriginalLink();
+                originalLinksData = links;
+                displayOriginalLinks();
                 updateStatistics();
                 clearResults();
                 
                 // Show file info
-                fileInfo.textContent = `✓ File "${file.name}" berhasil dimuat (${Link.length} Link)`;
+                fileInfo.textContent = `✓ File "${file.name}" berhasil dimuat (${links.length} links)`;
                 fileInfo.className = 'mt-2 text-sm text-green-600';
                 fileInfo.classList.remove('hidden');
                 
-                showNotification(`Berhasil memuat ${Link.length} Link dari file`, 'success');
+                showNotification(`Berhasil memuat ${links.length} links dari file`, 'success');
             };
             
             reader.onerror = function() {
@@ -393,25 +355,25 @@
             const inputText = manualInput.value.trim();
             
             if (!inputText) {
-                showNotification('Harap masukkan Link terlebih dahulu', 'error');
+                showNotification('Harap masukkan links terlebih dahulu', 'error');
                 return;
             }
             
-            const Link = inputText.split('\n')
+            const links = inputText.split('\n')
                 .map(link => link.trim())
                 .filter(link => link.length > 0);
             
-            if (Link.length === 0) {
+            if (links.length === 0) {
                 showNotification('Tidak ada link valid yang ditemukan', 'error');
                 return;
             }
             
-            originalLinkData = Link;
-            displayOriginalLink();
+            originalLinksData = links;
+            displayOriginalLinks();
             updateStatistics();
             clearResults();
             
-            showNotification(`Berhasil memuat ${Link.length} Link manual`, 'success');
+            showNotification(`Berhasil memuat ${links.length} links manual`, 'success');
             
             // Clear file input if any
             fileInput.value = '';
@@ -420,8 +382,8 @@
 
         // Load sample data
         function loadSampleData() {
-            originalLinkData = [...sampleLinkData];
-            displayOriginalLink();
+            originalLinksData = [...sampleLinksData];
+            displayOriginalLinks();
             updateStatistics();
             clearResults();
             
@@ -456,8 +418,8 @@
 
         // Clear results
         function clearResults() {
-            updatedLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Link yang sudah diperbarui akan muncul di sini</p>';
-            processedLinkSpan.textContent = '0';
+            updatedLinksContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-24 font-light">Link yang sudah diperbarui akan muncul di sini</p>';
+            processedLinksSpan.textContent = '0';
             lastUpdatedSpan.textContent = '-';
         }
 
@@ -465,7 +427,7 @@
         function showNotification(message, type = 'success') {
             const toast = document.createElement('div');
             const bgColor = type === 'success' ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-gradient-to-r from-red-500 to-rose-500';
-            toast.className = `fixed top-4 sm:top-6 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-sm ${bgColor} text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl z-50 transform transition-all duration-300 backdrop-blur-sm font-medium text-sm sm:text-base`;
+            toast.className = `fixed top-6 right-6 ${bgColor} text-white px-6 py-3 rounded-2xl shadow-2xl z-50 transform transition-all duration-300 backdrop-blur-sm font-medium`;
             toast.textContent = message;
             document.body.appendChild(toast);
             
@@ -479,13 +441,13 @@
             }, 3000);
         }
 
-        // Display original Link
-        function displayOriginalLink() {
-            originalLinkContainer.innerHTML = '';
+        // Display original links
+        function displayOriginalLinks() {
+            originalLinksContainer.innerHTML = '';
             
-            // Count Link by type
-            const counts = { superRabbit: 0, tigagoals: 0, total: originalLinkData.length };
-            originalLinkData.forEach(link => {
+            // Count links by type
+            const counts = { superRabbit: 0, tigagoals: 0, total: originalLinksData.length };
+            originalLinksData.forEach(link => {
                 if (isTigaoalsUrl(link)) {
                     counts.tigagoals++;
                 } else {
@@ -516,15 +478,15 @@
                 tgCountEl.classList.add('hidden');
             }
             
-            if (originalLinkData.length === 0) {
-                originalLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Upload file atau input manual untuk memulai</p>';
+            if (originalLinksData.length === 0) {
+                originalLinksContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-24 font-light">Upload file atau input manual untuk memulai</p>';
                 // Reset counters
                 superRabbitCountSpan.textContent = '0 SR';
                 tigagoalsCountSpan.textContent = '0 TG';
                 return;
             }
             
-            originalLinkData.forEach((link, index) => {
+            originalLinksData.forEach((link, index) => {
                 const linkElement = document.createElement('div');
                 linkElement.className = 'bg-white/90 p-4 rounded-xl border border-slate-200/60 text-sm shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in';
                 
@@ -533,15 +495,13 @@
                 const siteColor = isTigaoalsUrl(link) ? 'bg-violet-100/80 text-violet-700' : 'bg-amber-100/80 text-amber-700';
                 
                 linkElement.innerHTML = `
-                    <div class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-0">
-                        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-                            <span class="bg-blue-100/80 text-blue-700 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">${index + 1}</span>
-                            <span class="${siteColor} text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">${siteType}</span>
-                        </div>
-                        <span class="break-all text-slate-700 font-light leading-relaxed text-sm sm:text-base flex-1 sm:mx-3">${link}</span>
+                    <div class="flex items-start">
+                        <span class="bg-blue-100/80 text-blue-700 text-xs px-3 py-1.5 rounded-full mr-3 flex-shrink-0 font-medium">${index + 1}</span>
+                        <span class="${siteColor} text-xs px-3 py-1.5 rounded-full mr-3 flex-shrink-0 font-medium">${siteType}</span>
+                        <span class="break-all text-slate-700 font-light leading-relaxed">${link}</span>
                         <button 
                             onclick="removeLink(${index})" 
-                            class="self-end sm:self-start p-1 text-red-400 hover:text-red-600 transition-colors duration-200 flex-shrink-0"
+                            class="ml-auto p-1 text-red-400 hover:text-red-600 transition-colors duration-200"
                             title="Hapus link ini"
                         >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -550,15 +510,15 @@
                         </button>
                     </div>
                 `;
-                originalLinkContainer.appendChild(linkElement);
+                originalLinksContainer.appendChild(linkElement);
             });
         }
 
         // Remove individual link
         function removeLink(index) {
             if (confirm('Yakin ingin menghapus link ini?')) {
-                originalLinkData.splice(index, 1);
-                displayOriginalLink();
+                originalLinksData.splice(index, 1);
+                displayOriginalLinks();
                 updateStatistics();
                 clearResults();
                 showNotification('Link berhasil dihapus', 'success');
@@ -567,8 +527,8 @@
 
         // Handle replace functionality
         function handleReplace() {
-            if (originalLinkData.length === 0) {
-                showNotification('Harap upload file atau input Link terlebih dahulu!', 'error');
+            if (originalLinksData.length === 0) {
+                showNotification('Harap upload file atau input links terlebih dahulu!', 'error');
                 return;
             }
             
@@ -594,9 +554,9 @@
                 return;
             }
 
-            const updatedLink = replaceMatchSection(superRabbitPath, tigagoalsPath);
-            displayUpdatedLink(updatedLink);
-            updateStatistics(updatedLink.length);
+            const updatedLinks = replaceMatchSection(superRabbitPath, tigagoalsPath);
+            displayUpdatedLinks(updatedLinks);
+            updateStatistics(updatedLinks.length);
             
             // Add success animation
             replaceBtn.classList.add('animate-pulse');
@@ -604,15 +564,15 @@
                 replaceBtn.classList.remove('animate-pulse');
             }, 1000);
             
-            showNotification(`Berhasil memproses ${updatedLink.length} Link`, 'success');
+            showNotification(`Berhasil memproses ${updatedLinks.length} links`, 'success');
         }
 
         // Core replacement logic for multiple sites with dual inputs
         function replaceMatchSection(superRabbitPath, tigagoalsPath) {
-            const updatedLink = [];
+            const updatedLinks = [];
             const processedCount = { superRabbit: 0, tigagoals: 0, skipped: 0 };
             
-            originalLinkData.forEach(link => {
+            originalLinksData.forEach(link => {
                 let updatedLink = link; // Default to original link
                 
                 // Detect site type and apply appropriate replacement
@@ -634,7 +594,7 @@
                     }
                 }
                 
-                updatedLink.push(updatedLink);
+                updatedLinks.push(updatedLink);
             });
             
             // Show processing summary
@@ -647,7 +607,7 @@
                 showNotification(`Diproses - ${messages.join(', ')}`, 'success');
             }
             
-            return updatedLink;
+            return updatedLinks;
         }
 
         // Check if URL is from Tigagoals site
@@ -662,16 +622,16 @@
             return url.replace(/\/football\/.*/, '/football/' + newPath);
         }
 
-        // Display updated Link
-        function displayUpdatedLink(Link) {
-            updatedLinkContainer.innerHTML = '';
+        // Display updated links
+        function displayUpdatedLinks(links) {
+            updatedLinksContainer.innerHTML = '';
             
-            if (Link.length === 0) {
-                updatedLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Tidak ada link yang diperbarui</p>';
+            if (links.length === 0) {
+                updatedLinksContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-24 font-light">Tidak ada link yang diperbarui</p>';
                 return;
             }
             
-            Link.forEach((link, index) => {
+            links.forEach((link, index) => {
                 const linkElement = document.createElement('div');
                 linkElement.className = 'bg-white/90 p-4 rounded-xl border border-emerald-200/60 text-sm transform transition-all duration-300 hover:scale-[1.01] shadow-sm hover:shadow-md animate-fade-in';
                 linkElement.innerHTML = `
@@ -689,14 +649,14 @@
                         </button>
                     </div>
                 `;
-                updatedLinkContainer.appendChild(linkElement);
+                updatedLinksContainer.appendChild(linkElement);
             });
         }
 
         // Update statistics
         function updateStatistics(processedCount = 0) {
-            totalLinkSpan.textContent = originalLinkData.length;
-            processedLinkSpan.textContent = processedCount;
+            totalLinksSpan.textContent = originalLinksData.length;
+            processedLinksSpan.textContent = processedCount;
             
             if (processedCount > 0) {
                 const now = new Date();
@@ -718,19 +678,19 @@
 
         // Export results to file
         function exportResults() {
-            if (updatedLinkContainer.querySelector('p')) {
+            if (updatedLinksContainer.querySelector('p')) {
                 showNotification('Tidak ada hasil untuk diekspor', 'error');
                 return;
             }
             
-            const Link = Array.from(updatedLinkContainer.querySelectorAll('.break-all')).map(el => el.textContent);
-            const content = Link.join('\n');
+            const links = Array.from(updatedLinksContainer.querySelectorAll('.break-all')).map(el => el.textContent);
+            const content = links.join('\n');
             
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'updated_Link.txt';
+            a.download = 'updated_links.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
