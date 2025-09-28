@@ -16,10 +16,10 @@ function replaceTigagoalsPath(url, newPath) {
     return url.replace(/\/football\/.*/, '/football/' + newPath);
 }
 
-function replaceMatchSection(links, newSection) {
-    const updatedLinks = [];
+function replaceMatchSection(Link, newSection) {
+    const updatedLink = [];
     
-    links.forEach(link => {
+    Link.forEach(link => {
         let updatedLink;
         
         if (isTigaoalsUrl(link)) {
@@ -28,10 +28,10 @@ function replaceMatchSection(links, newSection) {
             updatedLink = link.replace(/\/id\/.*/, '/id/' + newSection);
         }
         
-        updatedLinks.push(updatedLink);
+        updatedLink.push(updatedLink);
     });
     
-    return updatedLinks;
+    return updatedLink;
 }
 
 console.log("=== Test Case Spesifik User ===");

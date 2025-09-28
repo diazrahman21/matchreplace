@@ -42,7 +42,7 @@ Output: https://example.com/en/id/football/match123.html?data=a
    - **Manual Input**: Paste URLs directly into the text area
    - **Sample Data**: Use built-in demo URLs for testing
 3. Enter your new URL segment (e.g., `football/match123.html`)
-4. Click "Process URLs" to transform your links
+4. Click "Process URLs" to transform your Link
 5. Export results or copy individual URLs
 
 ### Input Formats
@@ -61,7 +61,7 @@ Simply paste URLs in the textarea, one per line.
 
 - **Content Management** - Update URL structures across multiple pages
 - **SEO Optimization** - Standardize URL patterns for better SEO
-- **Site Migration** - Bulk update links during website migrations
+- **Site Migration** - Bulk update Link during website migrations
 - **Development** - Generate test URLs with consistent patterns
 - **Marketing** - Create campaign-specific URL variations
 

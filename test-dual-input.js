@@ -21,7 +21,7 @@ function replaceTigagoalsPath(url, newPath) {
 }
 
 function replaceMatchSection(superRabbitPath, tigagoalsPath) {
-    const updatedLinks = [];
+    const updatedLink = [];
     const processedCount = { superRabbit: 0, tigagoals: 0, skipped: 0 };
     
     mixedUrls.forEach(link => {
@@ -43,10 +43,10 @@ function replaceMatchSection(superRabbitPath, tigagoalsPath) {
             }
         }
         
-        updatedLinks.push(updatedLink);
+        updatedLink.push(updatedLink);
     });
     
-    return { links: updatedLinks, counts: processedCount };
+    return { Link: updatedLink, counts: processedCount };
 }
 
 console.log("=== Test Dual Input System ===");
@@ -63,7 +63,7 @@ mixedUrls.forEach((url, index) => {
 console.log();
 console.log("Output URLs:");
 const result = replaceMatchSection(superRabbitPath, tigagoalsPath);
-result.links.forEach((url, index) => {
+result.Link.forEach((url, index) => {
     const type = isTigaoalsUrl(mixedUrls[index]) ? 'Tigagoals' : 'Super Rabbit';
     const isChanged = url !== mixedUrls[index];
     console.log(`${index + 1}. [${type}] ${url} ${isChanged ? '✅ CHANGED' : '❌ UNCHANGED'}`);
@@ -74,7 +74,7 @@ console.log("Processing Summary:");
 console.log(`- Super Rabbit processed: ${result.counts.superRabbit}`);
 console.log(`- Tigagoals processed: ${result.counts.tigagoals}`);
 console.log(`- Skipped: ${result.counts.skipped}`);
-console.log(`- Total: ${result.links.length}`);
+console.log(`- Total: ${result.Link.length}`);
 
 // Test dengan hanya satu input
 console.log("\n=== Test dengan hanya Super Rabbit Input ===");

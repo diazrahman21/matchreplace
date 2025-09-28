@@ -5,123 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Replacer - URL Segment Replacer</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo.svg">
-    <link rel="icon" type="image/png" sizes="16x16" href="logo.svg">
-    <link rel="mask-icon" href="logo.svg" color="#215AA1">
-    <meta name="theme-color" content="#215AA1">
-    <meta name="msapplication-TileColor" content="#215AA1">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Smooth animations */
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Glassmorphism effect */
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            
+            /* Better text overflow handling for mobile */
+            .break-all {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            /* Adjust button sizes for mobile */
+            button {
+                min-height: 44px; /* Apple recommended touch target */
+            }
+            
+            /* Improve input field usability */
+            input, textarea {
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+        }
+        
+        /* Very small screen optimizations */
+        @media (max-width: 375px) {
+            .text-3xl { font-size: 1.5rem; }
+            .text-4xl { font-size: 1.75rem; }
+            .text-5xl { font-size: 2rem; }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         <!-- Header -->
-        <div class="text-center mb-8">
-            <div class="flex items-center justify-center mb-4">
-                <img src="logo.svg" alt="Match Replacer Logo" class="w-16 h-16 mr-4">
-                <h1 class="text-4xl font-bold text-gray-800">Match Replacer</h1>
-            </div>
-            <p class="text-gray-600 text-lg">Ganti segmen URL setelah /id/ dengan mudah</p>
+        <div class="text-center mb-8 sm:mb-10 lg:mb-12">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-700 tracking-tight mb-3 sm:mb-4">Match Replacer</h1>
+            <p class="text-slate-500 text-base sm:text-lg lg:text-xl font-light px-2 sm:px-0">Ganti segmen URL dengan mudah</p>
         </div>
 
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
             <!-- File Upload Section -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                    <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0">
+                    <svg class="w-6 h-6 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
-                    Upload File Links
+                    Upload File Link
                 </h2>
                 
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                     <!-- File Upload -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <label class="block text-sm font-semibold text-slate-700 mb-3">
                             Upload File (.txt)
                         </label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition-colors duration-200">
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:border-blue-400 hover:bg-blue-50/30 transition-all duration-300 bg-slate-50/50 h-32 sm:h-40 flex flex-col justify-center">
                             <input type="file" id="fileInput" accept=".txt" class="hidden">
                             <label for="fileInput" class="cursor-pointer">
-                                <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <svg class="mx-auto h-10 w-10 text-slate-400 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <p class="text-gray-600">
-                                    <span class="font-medium text-indigo-600">Klik untuk upload</span> atau drag & drop
+                                <p class="text-slate-600">
+                                    <span class="font-semibold text-blue-600">Klik untuk upload</span> atau drag & drop
                                 </p>
-                                <p class="text-sm text-gray-500 mt-1">File .txt dengan satu link per baris</p>
+                                <p class="text-sm text-slate-500 mt-2 font-light">File .txt dengan satu link per baris</p>
                             </label>
                         </div>
-                        <div id="fileInfo" class="mt-2 text-sm text-gray-600 hidden"></div>
+                        <div id="fileInfo" class="mt-3 text-sm text-slate-600 font-medium hidden"></div>
                     </div>
                     
                     <!-- Manual Input -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <label class="block text-sm font-semibold text-slate-700 mb-3">
                             Atau Input Manual
                         </label>
                         <textarea 
                             id="manualInput" 
-                            placeholder="Masukkan links satu per baris:&#10;https://example.com/id/test1&#10;https://example.com/id/test2"
-                            class="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none"
+                            placeholder="Masukkan Link satu per baris:&#10;https://example.com/id/test1&#10;https://example.com/id/test2"
+                            class="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-300/50 focus:border-blue-300 outline-none resize-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
                         ></textarea>
                         <button 
                             id="loadManualBtn"
-                            class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                            class="mt-3 w-full sm:w-auto bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
                         >
-                            Load Links Manual
+                            Load Link Manual
                         </button>
                     </div>
                 </div>
                 
                 <!-- Sample Data Button -->
-                <div class="mt-4 pt-4 border-t border-gray-200">
-                    <button 
-                        id="loadSampleBtn"
-                        class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                        Gunakan Data Contoh
-                    </button>
-                    <span class="text-sm text-gray-500 ml-2">5 link contoh (Super Rabbit & Tigagoals) untuk testing</span>
+                <div class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-slate-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0">
+                        <button 
+                            id="loadSampleBtn"
+                            class="w-full sm:w-auto bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                        >
+                            Gunakan Data Contoh
+                        </button>
+                        <span class="text-sm text-slate-500 sm:ml-3 font-light text-center sm:text-left">5 link contoh (Super Rabbit & Tigagoals) untuk testing</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Left Column - Original Links -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Left Column - Original Link -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6">
+                    <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0">
+                        <svg class="w-6 h-6 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                         Link Awal
-                        <div class="ml-auto flex gap-2">
-                            <span id="superRabbitCount" class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">0 SR</span>
-                            <span id="tigagoalsCount" class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded-full">0 TG</span>
-                            <span id="linkCount" class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">0</span>
+                        <div class="flex flex-wrap gap-2 sm:ml-auto">
+                            <span id="superRabbitCount" class="text-xs sm:text-sm bg-amber-100/70 text-amber-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0 SR</span>
+                            <span id="tigagoalsCount" class="text-xs sm:text-sm bg-violet-100/70 text-violet-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0 TG</span>
+                            <span id="linkCount" class="text-xs sm:text-sm bg-blue-100/70 text-blue-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">0</span>
                         </div>
                     </h2>
-                    <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto">
-                        <div id="originalLinks" class="space-y-2">
-                            <p class="text-gray-500 italic text-center pt-20">Upload file atau input manual untuk memulai</p>
+                    <div class="bg-slate-50/50 rounded-xl p-4 sm:p-6 h-64 sm:h-72 overflow-y-auto border border-slate-100">
+                        <div id="originalLink" class="space-y-2 sm:space-y-3">
+                            <p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Upload file atau input manual untuk memulai</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column - Updated Links -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-2xl font-semibold text-gray-800 flex items-center">
-                            <svg class="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Right Column - Updated Link -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3 sm:gap-0">
+                        <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             Link Baru
@@ -129,7 +184,7 @@
                         <button 
                             id="exportBtn"
                             onclick="exportResults()"
-                            class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center"
+                            class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center justify-center sm:justify-start shadow-md hover:shadow-lg"
                             title="Export ke file .txt"
                         >
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,55 +193,59 @@
                             Export
                         </button>
                     </div>
-                    <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto">
-                        <div id="updatedLinks" class="space-y-2">
-                            <p class="text-gray-500 italic text-center pt-20">Link yang sudah diperbarui akan muncul di sini</p>
+                    <div class="bg-slate-50/50 rounded-xl p-4 sm:p-6 h-64 sm:h-72 overflow-y-auto border border-slate-100">
+                        <div id="updatedLink" class="space-y-2 sm:space-y-3">
+                            <p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Link yang sudah diperbarui akan muncul di sini</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Input Section -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                    <svg class="w-6 h-6 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 lg:p-8 mt-6 sm:mt-8">
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 mb-6 sm:mb-8 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00 2 2h11a2 2 0 00 2-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
                     Ganti Segmen URL
                 </h2>
                 
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
                     <!-- Super Rabbit Input -->
-                    <div class="bg-orange-50 p-4 rounded-lg border border-orange-200 transition-all duration-300 hover:shadow-md">
-                        <label for="superRabbitInput" class="block text-sm font-medium text-orange-800 mb-2 flex items-center">
-                            <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Super Rabbit</span>
-                            Path Baru (setelah /id/)
-                            <span id="srWillProcess" class="ml-auto text-xs text-orange-600 font-medium hidden">akan diproses</span>
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-amber-200/50 transition-all duration-300 hover:shadow-lg hover:border-amber-300/50">
+                        <label for="superRabbitInput" class="block text-sm font-semibold text-amber-800 mb-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
+                            <div class="flex items-center">
+                                <span class="bg-amber-200/60 text-amber-900 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full mr-3 font-medium">Super Rabbit</span>
+                                <span class="text-xs sm:text-sm">Path Baru (setelah /id/)</span>
+                            </div>
+                            <span id="srWillProcess" class="text-xs text-orange-600 font-medium hidden sm:ml-auto">akan diproses</span>
                         </label>
                         <input 
                             type="text" 
                             id="superRabbitInput" 
                             placeholder="football/match123.html"
-                            class="w-full px-4 py-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-200"
+                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3.5 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-300/50 focus:border-amber-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
                         >
-                        <p class="text-sm text-orange-600 mt-1">Contoh: football/match123.html atau basketball/game456.html</p>
+                        <p class="text-sm text-amber-600 mt-2 font-light">Contoh: football/match123.html atau basketball/game456.html</p>
                         <p id="srCount" class="text-xs text-orange-500 mt-1 hidden">0 URLs Super Rabbit terdeteksi</p>
                     </div>
                     
                     <!-- Tigagoals Input -->
-                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 transition-all duration-300 hover:shadow-md">
-                        <label for="tigagoalsInput" class="block text-sm font-medium text-purple-800 mb-2 flex items-center">
-                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Tigagoals</span>
-                            Path Baru (setelah /football/)
-                            <span id="tgWillProcess" class="ml-auto text-xs text-purple-600 font-medium hidden">akan diproses</span>
+                    <div class="bg-gradient-to-br from-violet-50 to-purple-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-violet-200/50 transition-all duration-300 hover:shadow-lg hover:border-violet-300/50">
+                        <label for="tigagoalsInput" class="block text-sm font-semibold text-violet-800 mb-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
+                            <div class="flex items-center">
+                                <span class="bg-violet-200/60 text-violet-900 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full mr-3 font-medium">Tigagoals</span>
+                                <span class="text-xs sm:text-sm">Path Baru (setelah /football/)</span>
+                            </div>
+                            <span id="tgWillProcess" class="text-xs text-purple-600 font-medium hidden sm:ml-auto">akan diproses</span>
                         </label>
                         <input 
                             type="text" 
                             id="tigagoalsInput" 
                             placeholder="2800070-rennes-vs-lens.html"
-                            class="w-full px-4 py-3 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200"
+                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3.5 border border-violet-200 rounded-xl focus:ring-2 focus:ring-violet-300/50 focus:border-violet-300 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm text-sm sm:text-base"
                         >
-                        <p class="text-sm text-purple-600 mt-1">Contoh: 2800070-rennes-vs-lens.html atau 2800071-psg-vs-lyon.html</p>
+                        <p class="text-sm text-violet-600 mt-2 font-light">Contoh: 2800070-rennes-vs-lens.html atau 2800071-psg-vs-lyon.html</p>
                         <p id="tgCount" class="text-xs text-purple-500 mt-1 hidden">0 URLs Tigagoals terdeteksi</p>
                     </div>
                 </div>
@@ -194,7 +253,7 @@
                 <div class="flex justify-center">
                     <button 
                         id="replaceBtn"
-                        class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center"
+                        class="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300/50 focus:ring-offset-2 flex items-center justify-center shadow-lg text-sm sm:text-base"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -205,19 +264,19 @@
             </div>
 
             <!-- Statistics -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-slate-200/50 p-4 sm:p-6 mt-6 sm:mt-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-600" id="totalLinks">0</div>
-                        <div class="text-gray-600">Total Link</div>
+                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-500" id="totalLink">0</div>
+                        <div class="text-slate-600 font-medium text-sm sm:text-base">Total Link</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-green-600" id="processedLinks">0</div>
-                        <div class="text-gray-600">Berhasil Diproses</div>
+                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-500" id="processedLink">0</div>
+                        <div class="text-slate-600 font-medium text-sm sm:text-base">Berhasil Diproses</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-purple-600" id="lastUpdated">-</div>
-                        <div class="text-gray-600">Terakhir Diperbarui</div>
+                        <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-violet-500" id="lastUpdated">-</div>
+                        <div class="text-slate-600 font-medium text-sm sm:text-base">Terakhir Diperbarui</div>
                     </div>
                 </div>
             </div>
@@ -225,8 +284,8 @@
     </div>
 
     <script>
-        // Sample links data (for demonstration)
-        const sampleLinksData = [
+        // Sample Link data (for demonstration)
+        const sampleLinkData = [
             "https://example.com/en/id/basketball/game456.html?data=a",
             "https://anothersite.net/id/volleyball/match789/result",
             "https://idn00041.tigoals215.com/football/2800065-lille-vs-lyon.html",
@@ -234,17 +293,17 @@
             "https://superrabbit.com/id/soccer/match123.html"
         ];
 
-        // Current working links data
-        let originalLinksData = [];
+        // Current working Link data
+        let originalLinkData = [];
 
         // DOM elements
-        const originalLinksContainer = document.getElementById('originalLinks');
-        const updatedLinksContainer = document.getElementById('updatedLinks');
+        const originalLinkContainer = document.getElementById('originalLink');
+        const updatedLinkContainer = document.getElementById('updatedLink');
         const superRabbitInput = document.getElementById('superRabbitInput');
         const tigagoalsInput = document.getElementById('tigagoalsInput');
         const replaceBtn = document.getElementById('replaceBtn');
-        const totalLinksSpan = document.getElementById('totalLinks');
-        const processedLinksSpan = document.getElementById('processedLinks');
+        const totalLinkSpan = document.getElementById('totalLink');
+        const processedLinkSpan = document.getElementById('processedLink');
         const lastUpdatedSpan = document.getElementById('lastUpdated');
         const linkCountSpan = document.getElementById('linkCount');
         const superRabbitCountSpan = document.getElementById('superRabbitCount');
@@ -259,7 +318,7 @@
 
         // Initialize the application
         function init() {
-            displayOriginalLinks();
+            displayOriginalLink();
             updateStatistics();
             
             // Add event listeners
@@ -300,26 +359,26 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const content = e.target.result;
-                const links = content.split('\n')
+                const Link = content.split('\n')
                     .map(link => link.trim())
                     .filter(link => link.length > 0);
                 
-                if (links.length === 0) {
+                if (Link.length === 0) {
                     showNotification('File kosong atau tidak berisi link valid', 'error');
                     return;
                 }
                 
-                originalLinksData = links;
-                displayOriginalLinks();
+                originalLinkData = Link;
+                displayOriginalLink();
                 updateStatistics();
                 clearResults();
                 
                 // Show file info
-                fileInfo.textContent = `✓ File "${file.name}" berhasil dimuat (${links.length} links)`;
+                fileInfo.textContent = `✓ File "${file.name}" berhasil dimuat (${Link.length} Link)`;
                 fileInfo.className = 'mt-2 text-sm text-green-600';
                 fileInfo.classList.remove('hidden');
                 
-                showNotification(`Berhasil memuat ${links.length} links dari file`, 'success');
+                showNotification(`Berhasil memuat ${Link.length} Link dari file`, 'success');
             };
             
             reader.onerror = function() {
@@ -334,25 +393,25 @@
             const inputText = manualInput.value.trim();
             
             if (!inputText) {
-                showNotification('Harap masukkan links terlebih dahulu', 'error');
+                showNotification('Harap masukkan Link terlebih dahulu', 'error');
                 return;
             }
             
-            const links = inputText.split('\n')
+            const Link = inputText.split('\n')
                 .map(link => link.trim())
                 .filter(link => link.length > 0);
             
-            if (links.length === 0) {
+            if (Link.length === 0) {
                 showNotification('Tidak ada link valid yang ditemukan', 'error');
                 return;
             }
             
-            originalLinksData = links;
-            displayOriginalLinks();
+            originalLinkData = Link;
+            displayOriginalLink();
             updateStatistics();
             clearResults();
             
-            showNotification(`Berhasil memuat ${links.length} links manual`, 'success');
+            showNotification(`Berhasil memuat ${Link.length} Link manual`, 'success');
             
             // Clear file input if any
             fileInput.value = '';
@@ -361,8 +420,8 @@
 
         // Load sample data
         function loadSampleData() {
-            originalLinksData = [...sampleLinksData];
-            displayOriginalLinks();
+            originalLinkData = [...sampleLinkData];
+            displayOriginalLink();
             updateStatistics();
             clearResults();
             
@@ -397,16 +456,16 @@
 
         // Clear results
         function clearResults() {
-            updatedLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Link yang sudah diperbarui akan muncul di sini</p>';
-            processedLinksSpan.textContent = '0';
+            updatedLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Link yang sudah diperbarui akan muncul di sini</p>';
+            processedLinkSpan.textContent = '0';
             lastUpdatedSpan.textContent = '-';
         }
 
         // Show notification
         function showNotification(message, type = 'success') {
             const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-            toast.className = `fixed top-4 right-4 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg z-50 transform transition-all duration-300`;
+            const bgColor = type === 'success' ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-gradient-to-r from-red-500 to-rose-500';
+            toast.className = `fixed top-4 sm:top-6 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-sm ${bgColor} text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl z-50 transform transition-all duration-300 backdrop-blur-sm font-medium text-sm sm:text-base`;
             toast.textContent = message;
             document.body.appendChild(toast);
             
@@ -420,13 +479,13 @@
             }, 3000);
         }
 
-        // Display original links
-        function displayOriginalLinks() {
-            originalLinksContainer.innerHTML = '';
+        // Display original Link
+        function displayOriginalLink() {
+            originalLinkContainer.innerHTML = '';
             
-            // Count links by type
-            const counts = { superRabbit: 0, tigagoals: 0, total: originalLinksData.length };
-            originalLinksData.forEach(link => {
+            // Count Link by type
+            const counts = { superRabbit: 0, tigagoals: 0, total: originalLinkData.length };
+            originalLinkData.forEach(link => {
                 if (isTigaoalsUrl(link)) {
                     counts.tigagoals++;
                 } else {
@@ -457,30 +516,32 @@
                 tgCountEl.classList.add('hidden');
             }
             
-            if (originalLinksData.length === 0) {
-                originalLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Upload file atau input manual untuk memulai</p>';
+            if (originalLinkData.length === 0) {
+                originalLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Upload file atau input manual untuk memulai</p>';
                 // Reset counters
                 superRabbitCountSpan.textContent = '0 SR';
                 tigagoalsCountSpan.textContent = '0 TG';
                 return;
             }
             
-            originalLinksData.forEach((link, index) => {
+            originalLinkData.forEach((link, index) => {
                 const linkElement = document.createElement('div');
-                linkElement.className = 'bg-white p-3 rounded-lg border border-gray-200 text-sm';
+                linkElement.className = 'bg-white/90 p-4 rounded-xl border border-slate-200/60 text-sm shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in';
                 
                 // Determine site type for display
                 const siteType = isTigaoalsUrl(link) ? 'Tigagoals' : 'Super Rabbit';
-                const siteColor = isTigaoalsUrl(link) ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
+                const siteColor = isTigaoalsUrl(link) ? 'bg-violet-100/80 text-violet-700' : 'bg-amber-100/80 text-amber-700';
                 
                 linkElement.innerHTML = `
-                    <div class="flex items-start">
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${index + 1}</span>
-                        <span class="${siteColor} text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${siteType}</span>
-                        <span class="break-all text-gray-700">${link}</span>
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-0">
+                        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                            <span class="bg-blue-100/80 text-blue-700 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">${index + 1}</span>
+                            <span class="${siteColor} text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium">${siteType}</span>
+                        </div>
+                        <span class="break-all text-slate-700 font-light leading-relaxed text-sm sm:text-base flex-1 sm:mx-3">${link}</span>
                         <button 
                             onclick="removeLink(${index})" 
-                            class="ml-auto p-1 text-red-400 hover:text-red-600 transition-colors duration-200"
+                            class="self-end sm:self-start p-1 text-red-400 hover:text-red-600 transition-colors duration-200 flex-shrink-0"
                             title="Hapus link ini"
                         >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -489,15 +550,15 @@
                         </button>
                     </div>
                 `;
-                originalLinksContainer.appendChild(linkElement);
+                originalLinkContainer.appendChild(linkElement);
             });
         }
 
         // Remove individual link
         function removeLink(index) {
             if (confirm('Yakin ingin menghapus link ini?')) {
-                originalLinksData.splice(index, 1);
-                displayOriginalLinks();
+                originalLinkData.splice(index, 1);
+                displayOriginalLink();
                 updateStatistics();
                 clearResults();
                 showNotification('Link berhasil dihapus', 'success');
@@ -506,8 +567,8 @@
 
         // Handle replace functionality
         function handleReplace() {
-            if (originalLinksData.length === 0) {
-                showNotification('Harap upload file atau input links terlebih dahulu!', 'error');
+            if (originalLinkData.length === 0) {
+                showNotification('Harap upload file atau input Link terlebih dahulu!', 'error');
                 return;
             }
             
@@ -533,9 +594,9 @@
                 return;
             }
 
-            const updatedLinks = replaceMatchSection(superRabbitPath, tigagoalsPath);
-            displayUpdatedLinks(updatedLinks);
-            updateStatistics(updatedLinks.length);
+            const updatedLink = replaceMatchSection(superRabbitPath, tigagoalsPath);
+            displayUpdatedLink(updatedLink);
+            updateStatistics(updatedLink.length);
             
             // Add success animation
             replaceBtn.classList.add('animate-pulse');
@@ -543,15 +604,15 @@
                 replaceBtn.classList.remove('animate-pulse');
             }, 1000);
             
-            showNotification(`Berhasil memproses ${updatedLinks.length} links`, 'success');
+            showNotification(`Berhasil memproses ${updatedLink.length} Link`, 'success');
         }
 
         // Core replacement logic for multiple sites with dual inputs
         function replaceMatchSection(superRabbitPath, tigagoalsPath) {
-            const updatedLinks = [];
+            const updatedLink = [];
             const processedCount = { superRabbit: 0, tigagoals: 0, skipped: 0 };
             
-            originalLinksData.forEach(link => {
+            originalLinkData.forEach(link => {
                 let updatedLink = link; // Default to original link
                 
                 // Detect site type and apply appropriate replacement
@@ -573,7 +634,7 @@
                     }
                 }
                 
-                updatedLinks.push(updatedLink);
+                updatedLink.push(updatedLink);
             });
             
             // Show processing summary
@@ -586,7 +647,7 @@
                 showNotification(`Diproses - ${messages.join(', ')}`, 'success');
             }
             
-            return updatedLinks;
+            return updatedLink;
         }
 
         // Check if URL is from Tigagoals site
@@ -601,22 +662,22 @@
             return url.replace(/\/football\/.*/, '/football/' + newPath);
         }
 
-        // Display updated links
-        function displayUpdatedLinks(links) {
-            updatedLinksContainer.innerHTML = '';
+        // Display updated Link
+        function displayUpdatedLink(Link) {
+            updatedLinkContainer.innerHTML = '';
             
-            if (links.length === 0) {
-                updatedLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Tidak ada link yang diperbarui</p>';
+            if (Link.length === 0) {
+                updatedLinkContainer.innerHTML = '<p class="text-slate-400 italic text-center pt-16 sm:pt-24 font-light text-sm sm:text-base px-2">Tidak ada link yang diperbarui</p>';
                 return;
             }
             
-            links.forEach((link, index) => {
+            Link.forEach((link, index) => {
                 const linkElement = document.createElement('div');
-                linkElement.className = 'bg-white p-3 rounded-lg border border-green-200 text-sm transform transition-all duration-300 hover:scale-102';
+                linkElement.className = 'bg-white/90 p-4 rounded-xl border border-emerald-200/60 text-sm transform transition-all duration-300 hover:scale-[1.01] shadow-sm hover:shadow-md animate-fade-in';
                 linkElement.innerHTML = `
                     <div class="flex items-start">
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${index + 1}</span>
-                        <span class="break-all text-gray-700">${link}</span>
+                        <span class="bg-emerald-100/80 text-emerald-700 text-xs px-3 py-1.5 rounded-full mr-3 flex-shrink-0 font-medium">${index + 1}</span>
+                        <span class="break-all text-slate-700 font-light leading-relaxed">${link}</span>
                         <button 
                             onclick="copyToClipboard('${link}')" 
                             class="ml-2 p-1 text-gray-400 hover:text-blue-600 transition-colors duration-200"
@@ -628,14 +689,14 @@
                         </button>
                     </div>
                 `;
-                updatedLinksContainer.appendChild(linkElement);
+                updatedLinkContainer.appendChild(linkElement);
             });
         }
 
         // Update statistics
         function updateStatistics(processedCount = 0) {
-            totalLinksSpan.textContent = originalLinksData.length;
-            processedLinksSpan.textContent = processedCount;
+            totalLinkSpan.textContent = originalLinkData.length;
+            processedLinkSpan.textContent = processedCount;
             
             if (processedCount > 0) {
                 const now = new Date();
@@ -657,19 +718,19 @@
 
         // Export results to file
         function exportResults() {
-            if (updatedLinksContainer.querySelector('p')) {
+            if (updatedLinkContainer.querySelector('p')) {
                 showNotification('Tidak ada hasil untuk diekspor', 'error');
                 return;
             }
             
-            const links = Array.from(updatedLinksContainer.querySelectorAll('.break-all')).map(el => el.textContent);
-            const content = links.join('\n');
+            const Link = Array.from(updatedLinkContainer.querySelectorAll('.break-all')).map(el => el.textContent);
+            const content = Link.join('\n');
             
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'updated_links.txt';
+            a.download = 'updated_Link.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
