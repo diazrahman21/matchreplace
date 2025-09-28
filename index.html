@@ -92,7 +92,7 @@
                     >
                         Gunakan Data Contoh
                     </button>
-                    <span class="text-sm text-gray-500 ml-2">3 link contoh untuk testing</span>
+                    <span class="text-sm text-gray-500 ml-2">5 link contoh (Super Rabbit & Tigagoals) untuk testing</span>
                 </div>
             </div>
 
@@ -104,7 +104,11 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                         Link Awal
-                        <span id="linkCount" class="ml-auto text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">0</span>
+                        <div class="ml-auto flex gap-2">
+                            <span id="superRabbitCount" class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">0 SR</span>
+                            <span id="tigagoalsCount" class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded-full">0 TG</span>
+                            <span id="linkCount" class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">0</span>
+                        </div>
                     </h2>
                     <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto">
                         <div id="originalLinks" class="space-y-2">
@@ -151,28 +155,52 @@
                     Ganti Segmen URL
                 </h2>
                 
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1">
-                        <label for="newSection" class="block text-sm font-medium text-gray-700 mb-2">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Super Rabbit Input -->
+                    <div class="bg-orange-50 p-4 rounded-lg border border-orange-200 transition-all duration-300 hover:shadow-md">
+                        <label for="superRabbitInput" class="block text-sm font-medium text-orange-800 mb-2 flex items-center">
+                            <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Super Rabbit</span>
                             Path Baru (setelah /id/)
+                            <span id="srWillProcess" class="ml-auto text-xs text-orange-600 font-medium hidden">akan diproses</span>
                         </label>
                         <input 
                             type="text" 
-                            id="newSection" 
+                            id="superRabbitInput" 
                             placeholder="football/match123.html"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                            class="w-full px-4 py-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-200"
                         >
-                        <p class="text-sm text-gray-500 mt-1">Contoh: football/match123.html atau basketball/game456.html</p>
+                        <p class="text-sm text-orange-600 mt-1">Contoh: football/match123.html atau basketball/game456.html</p>
+                        <p id="srCount" class="text-xs text-orange-500 mt-1 hidden">0 URLs Super Rabbit terdeteksi</p>
                     </div>
                     
-                    <div class="flex items-end">
-                        <button 
-                            id="replaceBtn"
-                            class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    <!-- Tigagoals Input -->
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 transition-all duration-300 hover:shadow-md">
+                        <label for="tigagoalsInput" class="block text-sm font-medium text-purple-800 mb-2 flex items-center">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Tigagoals</span>
+                            Path Baru (setelah /football/)
+                            <span id="tgWillProcess" class="ml-auto text-xs text-purple-600 font-medium hidden">akan diproses</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="tigagoalsInput" 
+                            placeholder="2800070-rennes-vs-lens.html"
+                            class="w-full px-4 py-3 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200"
                         >
-                            Ganti dan Tampilkan Link Baru
-                        </button>
+                        <p class="text-sm text-purple-600 mt-1">Contoh: 2800070-rennes-vs-lens.html atau 2800071-psg-vs-lyon.html</p>
+                        <p id="tgCount" class="text-xs text-purple-500 mt-1 hidden">0 URLs Tigagoals terdeteksi</p>
                     </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button 
+                        id="replaceBtn"
+                        class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center"
+                    >
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        Ganti dan Tampilkan Link Baru
+                    </button>
                 </div>
             </div>
 
@@ -201,7 +229,9 @@
         const sampleLinksData = [
             "https://example.com/en/id/basketball/game456.html?data=a",
             "https://anothersite.net/id/volleyball/match789/result",
-            "https://yetanother.com/page/id/hockey/schedule.asp"
+            "https://idn00041.tigoals215.com/football/2800065-lille-vs-lyon.html",
+            "https://idn00041.tigoals215.com/football/2800066-psg-vs-marseille.html",
+            "https://superrabbit.com/id/soccer/match123.html"
         ];
 
         // Current working links data
@@ -210,12 +240,15 @@
         // DOM elements
         const originalLinksContainer = document.getElementById('originalLinks');
         const updatedLinksContainer = document.getElementById('updatedLinks');
-        const newSectionInput = document.getElementById('newSection');
+        const superRabbitInput = document.getElementById('superRabbitInput');
+        const tigagoalsInput = document.getElementById('tigagoalsInput');
         const replaceBtn = document.getElementById('replaceBtn');
         const totalLinksSpan = document.getElementById('totalLinks');
         const processedLinksSpan = document.getElementById('processedLinks');
         const lastUpdatedSpan = document.getElementById('lastUpdated');
         const linkCountSpan = document.getElementById('linkCount');
+        const superRabbitCountSpan = document.getElementById('superRabbitCount');
+        const tigagoalsCountSpan = document.getElementById('tigagoalsCount');
         
         // File upload elements
         const fileInput = document.getElementById('fileInput');
@@ -231,7 +264,12 @@
             
             // Add event listeners
             replaceBtn.addEventListener('click', handleReplace);
-            newSectionInput.addEventListener('keypress', function(e) {
+            superRabbitInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleReplace();
+                }
+            });
+            tigagoalsInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     handleReplace();
                 }
@@ -385,19 +423,60 @@
         // Display original links
         function displayOriginalLinks() {
             originalLinksContainer.innerHTML = '';
-            linkCountSpan.textContent = originalLinksData.length;
+            
+            // Count links by type
+            const counts = { superRabbit: 0, tigagoals: 0, total: originalLinksData.length };
+            originalLinksData.forEach(link => {
+                if (isTigaoalsUrl(link)) {
+                    counts.tigagoals++;
+                } else {
+                    counts.superRabbit++;
+                }
+            });
+            
+            // Update counters
+            linkCountSpan.textContent = counts.total;
+            superRabbitCountSpan.textContent = `${counts.superRabbit} SR`;
+            tigagoalsCountSpan.textContent = `${counts.tigagoals} TG`;
+            
+            // Update input box counters
+            const srCountEl = document.getElementById('srCount');
+            const tgCountEl = document.getElementById('tgCount');
+            
+            if (counts.superRabbit > 0) {
+                srCountEl.textContent = `${counts.superRabbit} URLs Super Rabbit terdeteksi`;
+                srCountEl.classList.remove('hidden');
+            } else {
+                srCountEl.classList.add('hidden');
+            }
+            
+            if (counts.tigagoals > 0) {
+                tgCountEl.textContent = `${counts.tigagoals} URLs Tigagoals terdeteksi`;
+                tgCountEl.classList.remove('hidden');
+            } else {
+                tgCountEl.classList.add('hidden');
+            }
             
             if (originalLinksData.length === 0) {
                 originalLinksContainer.innerHTML = '<p class="text-gray-500 italic text-center pt-20">Upload file atau input manual untuk memulai</p>';
+                // Reset counters
+                superRabbitCountSpan.textContent = '0 SR';
+                tigagoalsCountSpan.textContent = '0 TG';
                 return;
             }
             
             originalLinksData.forEach((link, index) => {
                 const linkElement = document.createElement('div');
                 linkElement.className = 'bg-white p-3 rounded-lg border border-gray-200 text-sm';
+                
+                // Determine site type for display
+                const siteType = isTigaoalsUrl(link) ? 'Tigagoals' : 'Super Rabbit';
+                const siteColor = isTigaoalsUrl(link) ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
+                
                 linkElement.innerHTML = `
                     <div class="flex items-start">
                         <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${index + 1}</span>
+                        <span class="${siteColor} text-xs px-2 py-1 rounded mr-2 flex-shrink-0">${siteType}</span>
                         <span class="break-all text-gray-700">${link}</span>
                         <button 
                             onclick="removeLink(${index})" 
@@ -432,21 +511,29 @@
                 return;
             }
             
-            const newSection = newSectionInput.value.trim();
+            const superRabbitPath = superRabbitInput.value.trim();
+            const tigagoalsPath = tigagoalsInput.value.trim();
             
-            if (!newSection) {
-                showNotification('Silakan masukkan path baru terlebih dahulu!', 'error');
-                newSectionInput.focus();
+            // Check if at least one input is filled
+            if (!superRabbitPath && !tigagoalsPath) {
+                showNotification('Silakan isi minimal salah satu input (Super Rabbit atau Tigagoals)!', 'error');
                 return;
             }
 
-            // Validate input (basic validation)
-            if (newSection.startsWith('/') || newSection.endsWith('/')) {
-                showNotification('Path tidak boleh dimulai atau diakhiri dengan "/"', 'error');
+            // Validate inputs (basic validation)
+            if (superRabbitPath && (superRabbitPath.startsWith('/') || superRabbitPath.endsWith('/'))) {
+                showNotification('Path Super Rabbit tidak boleh dimulai atau diakhiri dengan "/"', 'error');
+                superRabbitInput.focus();
+                return;
+            }
+            
+            if (tigagoalsPath && (tigagoalsPath.startsWith('/') || tigagoalsPath.endsWith('/'))) {
+                showNotification('Path Tigagoals tidak boleh dimulai atau diakhiri dengan "/"', 'error');
+                tigagoalsInput.focus();
                 return;
             }
 
-            const updatedLinks = replaceMatchSection(newSection);
+            const updatedLinks = replaceMatchSection(superRabbitPath, tigagoalsPath);
             displayUpdatedLinks(updatedLinks);
             updateStatistics(updatedLinks.length);
             
@@ -459,18 +546,59 @@
             showNotification(`Berhasil memproses ${updatedLinks.length} links`, 'success');
         }
 
-        // Core replacement logic (equivalent to Python regex)
-        function replaceMatchSection(newSection) {
+        // Core replacement logic for multiple sites with dual inputs
+        function replaceMatchSection(superRabbitPath, tigagoalsPath) {
             const updatedLinks = [];
+            const processedCount = { superRabbit: 0, tigagoals: 0, skipped: 0 };
             
             originalLinksData.forEach(link => {
-                // JavaScript equivalent of Python's r'(/id/).*' regex
-                // This replaces everything after '/id/' with the new section
-                const updatedLink = link.replace(/\/id\/.*/, '/id/' + newSection);
+                let updatedLink = link; // Default to original link
+                
+                // Detect site type and apply appropriate replacement
+                if (isTigaoalsUrl(link)) {
+                    // For Tigagoals: use tigagoals input
+                    if (tigagoalsPath) {
+                        updatedLink = replaceTigagoalsPath(link, tigagoalsPath);
+                        processedCount.tigagoals++;
+                    } else {
+                        processedCount.skipped++;
+                    }
+                } else {
+                    // For Super Rabbit and other sites: use super rabbit input
+                    if (superRabbitPath) {
+                        updatedLink = link.replace(/\/id\/.*/, '/id/' + superRabbitPath);
+                        processedCount.superRabbit++;
+                    } else {
+                        processedCount.skipped++;
+                    }
+                }
+                
                 updatedLinks.push(updatedLink);
             });
             
+            // Show processing summary
+            const messages = [];
+            if (processedCount.superRabbit > 0) messages.push(`Super Rabbit: ${processedCount.superRabbit}`);
+            if (processedCount.tigagoals > 0) messages.push(`Tigagoals: ${processedCount.tigagoals}`);
+            if (processedCount.skipped > 0) messages.push(`Dilewati: ${processedCount.skipped}`);
+            
+            if (messages.length > 0) {
+                showNotification(`Diproses - ${messages.join(', ')}`, 'success');
+            }
+            
             return updatedLinks;
+        }
+
+        // Check if URL is from Tigagoals site
+        function isTigaoalsUrl(url) {
+            return url.includes('tigoals') || url.includes('tigagoals');
+        }
+
+        // Replace entire path after /football/ for Tigagoals URLs
+        function replaceTigagoalsPath(url, newPath) {
+            // Pattern: replace everything after /football/ with new path
+            // Similar to Super Rabbit but for /football/ instead of /id/
+            return url.replace(/\/football\/.*/, '/football/' + newPath);
         }
 
         // Display updated links
