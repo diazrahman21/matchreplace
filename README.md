@@ -1,36 +1,51 @@
 # 🔗 Match Replacer
 
-**Professional URL Segment Replacement Tool**
+**Professional Dual-Site URL Segment Replacement Tool**
 
-A modern, enterprise-grade web application designed for bulk URL processing and segment replacement using advanced pattern matching technology.
+A modern, enterprise-grade web application designed for bulk URL processing and segment replacement across multiple streaming sites using advanced pattern matching technology.
 
 ## ✨ Features
 
-- 🚀 **Bulk URL Processing** - Process hundreds of URLs simultaneously
-- 🎯 **Pattern Matching** - Advanced RegEx-based `/id/` segment replacement
+- 🚀 **Dual-Site Processing** - Supports both Super Rabbit and Tigagoals URLs
+- 🎯 **Advanced Pattern Matching** - Site-specific RegEx patterns for precise replacement
 - 📁 **Multiple Input Methods** - File upload, manual input, or sample data
 - 💾 **Export Functionality** - Download processed results as .txt files
-- 📊 **Real-time Analytics** - Live processing statistics and metrics
-- 🎨 **Professional UI** - Modern, responsive design with glass-morphism effects
-- ⚡ **Instant Processing** - Real-time URL transformation
+- 📊 **Real-time Analytics** - Live processing statistics and site-type counters
+- 🎨 **Professional UI** - Modern glassmorphism design with soft color palette
+- ⚡ **Instant Processing** - Real-time URL transformation with visual feedback
 - 📱 **Mobile Responsive** - Works seamlessly on all devices
+- 🏷️ **Site Detection** - Automatic site type identification and labeling
+- 🔧 **Dual Input System** - Separate input fields for each site type
 
 ## 🛠️ How It Works
 
-Match Replacer uses JavaScript RegEx pattern matching to find and replace URL segments that come after `/id/` in any URL structure.
+Match Replacer uses JavaScript RegEx pattern matching with site-specific logic to replace URL segments based on the detected streaming site.
 
-**Pattern Logic:**
+**Super Rabbit Pattern Logic:**
 ```javascript
 // Finds: /id/[anything]
 // Replaces with: /id/[your-new-segment]
 url.replace(/\/id\/.*/, '/id/' + newSegment)
 ```
 
-**Example:**
+**Tigagoals Pattern Logic:**
+```javascript
+// Finds: /football/[anything]
+// Replaces with: /football/[your-new-segment]
+url.replace(/\/football\/.*/, '/football/' + newSegment)
 ```
+
+**Examples:**
+```
+Super Rabbit:
 Input:  https://example.com/en/id/basketball/game456.html?data=a
 Pattern: football/match123.html
 Output: https://example.com/en/id/football/match123.html?data=a
+
+Tigagoals:
+Input:  https://idn00041.tigoals215.com/football/2800065-lille-vs-lyon.html
+Pattern: 2800070-rennes-vs-lens.html
+Output: https://idn00041.tigoals215.com/football/2800070-rennes-vs-lens.html
 ```
 
 ## 🚀 Getting Started
@@ -40,10 +55,23 @@ Output: https://example.com/en/id/football/match123.html?data=a
 2. Choose your input method:
    - **File Upload**: Drag & drop a .txt file with URLs (one per line)
    - **Manual Input**: Paste URLs directly into the text area
-   - **Sample Data**: Use built-in demo URLs for testing
-3. Enter your new URL segment (e.g., `football/match123.html`)
-4. Click "Process URLs" to transform your Link
+   - **Sample Data**: Use built-in demo URLs for testing (includes both site types)
+3. Enter your new URL segments:
+   - **Super Rabbit Input**: For sites with `/id/` patterns (e.g., `football/match123.html`)
+   - **Tigagoals Input**: For sites with `/football/` patterns (e.g., `2800070-rennes-vs-lens.html`)
+4. Click "Ganti dan Tampilkan Link Baru" to transform your URLs
 5. Export results or copy individual URLs
+
+### Supported Sites
+
+**Super Rabbit Sites:**
+- Any URL containing `/id/` pattern
+- Examples: example.com, superrabbit.com, anothersite.net
+
+**Tigagoals Sites:**
+- URLs containing "tigoals" or "tigagoals" in domain
+- Uses `/football/` pattern matching
+- Examples: tigoals215.com, tigagoals.net
 
 ### Input Formats
 
@@ -51,19 +79,20 @@ Output: https://example.com/en/id/football/match123.html?data=a
 ```
 https://example.com/id/old-segment1
 https://another.com/id/old-segment2
-https://site.com/id/old-segment3
+https://idn00041.tigoals215.com/football/2800065-old-match.html
 ```
 
 **Manual Input:**
-Simply paste URLs in the textarea, one per line.
+Simply paste URLs in the textarea, one per line. Mix both site types freely.
 
 ## 🎯 Use Cases
 
-- **Content Management** - Update URL structures across multiple pages
-- **SEO Optimization** - Standardize URL patterns for better SEO
-- **Site Migration** - Bulk update Link during website migrations
-- **Development** - Generate test URLs with consistent patterns
-- **Marketing** - Create campaign-specific URL variations
+- **Multi-Site Content Management** - Update URL structures across different streaming platforms
+- **SEO Optimization** - Standardize URL patterns for better SEO across multiple sites
+- **Site Migration** - Bulk update links during website migrations for both platforms
+- **Development Testing** - Generate test URLs with consistent patterns for different sites
+- **Campaign Management** - Create site-specific URL variations for marketing campaigns
+- **Content Syndication** - Manage URLs across multiple streaming platforms simultaneously
 
 ## 📋 Requirements
 
@@ -74,62 +103,77 @@ Simply paste URLs in the textarea, one per line.
 ## 🏗️ Technical Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Styling**: Tailwind CSS
-- **Fonts**: Inter, JetBrains Mono
-- **Icons**: Heroicons
+- **Styling**: Tailwind CSS with custom glassmorphism effects
+- **Fonts**: Inter (UI), JetBrains Mono (code)
+- **Color Palette**: Professional soft theme (slate, blue, amber, violet)
 - **Features**: 
   - Drag & Drop API
   - Clipboard API
   - File API
-  - RegEx Processing
+  - Dual RegEx Processing
+  - Site Type Detection
+  - Real-time URL Counting
 
 ## 📸 Screenshots
 
 ### Main Interface
-Professional dashboard with glass-morphism design and intuitive workflow.
+Professional dashboard with glassmorphism design and dual-input workflow for both site types.
 
-### File Upload
-Drag & drop interface with visual feedback and file validation.
+### Dual Input System
+Separate input fields for Super Rabbit and Tigagoals with visual site type indicators.
 
 ### Results View
-Clean results display with copy-to-clipboard and export functionality.
+Clean results display with site type labels, copy-to-clipboard, and export functionality.
 
 ## 🎨 Design Features
 
-- **Glass-morphism UI** - Modern translucent design elements
-- **Gradient Backgrounds** - Professional color schemes
-- **Smooth Animations** - Engaging micro-interactions
-- **Responsive Layout** - Mobile-first design approach
-- **Professional Typography** - Clean, readable font combinations
-- **Status Indicators** - Real-time system status and metrics
+- **Glassmorphism UI** - Modern translucent design with backdrop blur
+- **Soft Color Palette** - Professional theme with slate, blue, amber, and violet accents
+- **Site Type Indicators** - Visual labels distinguishing Super Rabbit and Tigagoals URLs
+- **Smooth Animations** - Engaging micro-interactions and fade-in effects
+- **Responsive Layout** - Mobile-first design approach with flexible grid system
+- **Professional Typography** - Inter font family for clean, readable interface
+- **Real-time Counters** - Live statistics showing site-specific URL counts
 
 ## 🔧 Advanced Usage
 
 ### Pattern Customization
-The current version focuses on `/id/` pattern replacement. The RegEx can be modified for other patterns:
+The application supports two distinct patterns for different streaming sites:
 
 ```javascript
-// Current pattern: /id/
+// Super Rabbit pattern: /id/
 url.replace(/\/id\/.*/, '/id/' + newSegment)
 
-// Custom pattern examples:
-url.replace(/\/category\/.*/, '/category/' + newSegment)  // /category/
-url.replace(/\/product\/.*/, '/product/' + newSegment)   // /product/
+// Tigagoals pattern: /football/
+url.replace(/\/football\/.*/, '/football/' + newSegment)
+
+// Site detection logic
+function isTigaoalsUrl(url) {
+    return url.includes('tigoals') || url.includes('tigagoals');
+}
 ```
+
+### Dual Input Processing
+- **Flexible Input**: Fill one or both input fields based on your URL types
+- **Smart Processing**: URLs are automatically routed to the correct processor
+- **Mixed Batches**: Process Super Rabbit and Tigagoals URLs in the same batch
+- **Validation**: Automatic path validation prevents common input errors
 
 ### Batch Processing Tips
 - **File Size**: Recommended maximum of 10,000 URLs per batch
 - **Format**: Ensure one URL per line in input files
-- **Validation**: URLs are automatically validated during processing
+- **Mixed Sites**: Freely mix Super Rabbit and Tigagoals URLs in the same file
+- **Validation**: URLs are automatically validated and categorized during processing
 - **Performance**: Processing is done client-side for instant results
 
 ## 📊 Analytics Dashboard
 
-The built-in analytics provide:
+The built-in analytics provide comprehensive insights:
 - **Total URLs**: Number of URLs loaded for processing
-- **Processed Count**: Successfully transformed URLs
+- **Site Type Breakdown**: Separate counters for Super Rabbit (SR) and Tigagoals (TG)
+- **Processed Count**: Successfully transformed URLs with site-specific breakdown
 - **Last Updated**: Timestamp of last processing operation
-- **System Status**: Real-time indicators for system health
+- **Real-time Indicators**: Visual feedback showing which input fields will be processed
 
 ## 🚀 Performance
 
@@ -140,10 +184,11 @@ The built-in analytics provide:
 
 ## 🔐 Privacy & Security
 
-- **Local Processing**: All operations performed in browser
-- **No Data Transmission**: URLs never leave your device
+- **Local Processing**: All operations performed in browser - no server communication
+- **No Data Transmission**: URLs never leave your device or sent to external services
 - **No Server Dependencies**: Completely client-side application
-- **Secure by Design**: No external API calls or data storage
+- **Secure by Design**: No external API calls, data storage, or third-party services
+- **Site-Agnostic**: Works with any URLs matching the supported patterns
 
 ## 🤝 Contributing
 
@@ -168,11 +213,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆔 Version
 
-**Current Version**: 1.0.0
-- Initial release with core functionality
-- Professional UI implementation
-- Full pattern matching support
-- Export and analytics features
+**Current Version**: 2.0.0
+- Dual-site support (Super Rabbit + Tigagoals)
+- Professional glassmorphism UI redesign
+- Separate input system for each site type
+- Site detection and automatic routing
+- Enhanced analytics with site-type breakdown
+- Improved visual feedback and notifications
+- Mobile-responsive design optimization
+
+**Previous Version**: 1.0.0
+- Initial release with Super Rabbit support only
+- Basic UI implementation
+- Single pattern matching support
 
 ## 🙋‍♂️ Support
 
@@ -185,28 +238,32 @@ Need help? Here are your options:
 
 ## 🎯 Roadmap
 
-### Version 1.1 (Coming Soon)
-- [ ] Custom pattern support
-- [ ] Undo/Redo functionality
-- [ ] URL validation with visual feedback
-- [ ] Batch processing progress bar
+### Version 2.1 (Coming Soon)
+- [ ] Additional streaming site support
+- [ ] Custom pattern editor for advanced users
+- [ ] URL preview with before/after comparison
+- [ ] Batch processing progress indicator
+- [ ] Enhanced site detection algorithms
 
-### Version 1.2 (Future)
-- [ ] CSV export support
-- [ ] URL preview before processing
-- [ ] Advanced RegEx editor
-- [ ] Processing history
+### Version 2.2 (Future)
+- [ ] CSV export support with site type columns
+- [ ] Processing history and session management
+- [ ] Advanced RegEx editor with syntax highlighting
+- [ ] Bulk operations (delete, filter, sort)
+- [ ] URL validation with detailed error reporting
+- [ ] Custom site pattern definitions
 
 ## 🏆 Acknowledgments
 
-- **Tailwind CSS** - For the beautiful styling framework
-- **Heroicons** - For the professional icon set
-- **Google Fonts** - For the typography (Inter & JetBrains Mono)
-- **Modern Web APIs** - For file handling and clipboard functionality
+- **Tailwind CSS** - For the beautiful styling framework and utility classes
+- **Inter Font Family** - For the clean, professional typography
+- **JavaScript Web APIs** - For file handling, clipboard, and drag-drop functionality
+- **Glassmorphism Design** - For the modern visual aesthetic inspiration
+- **Community Feedback** - For driving the dual-site feature development
 
 ---
 
-**Match Replacer** - Making URL management professional and efficient.
+**Match Replacer v2.0** - Professional dual-site URL management made efficient.
 
 ---
 
@@ -218,4 +275,4 @@ Need help? Here are your options:
 
 ---
 
-*Last updated: September 26, 2025*
+*Last updated: September 30, 2025*
